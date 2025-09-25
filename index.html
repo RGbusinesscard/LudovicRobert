@@ -12,62 +12,35 @@
     --ink:#1e242a; --muted:#636a72; --cta:#c21f20;
     --ring:#eadfcf; --glass:rgba(255,255,255,.62); --glass-brd:rgba(255,255,255,.38);
     --r:22px; --shadow-lg:0 22px 80px rgba(10,12,16,.20); --shadow-sm:0 10px 30px rgba(10,12,16,.12);
-    --gold1:#f5e6c8; --gold2:#d9c29e;
   }
   *{box-sizing:border-box}
-  html,body{height:100%}
   body{margin:0;color:var(--ink);background:var(--bg);
        font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  .bg{position:fixed;inset:0;z-index:-3;overflow:hidden}
-  .blob{position:absolute;filter:blur(40px) saturate(115%);opacity:.55;animation:drift 26s ease-in-out infinite alternate}
-  .b1{width:1100px;height:700px;left:-18%;top:-14%;
-      background:radial-gradient(ellipse at center,#fff8 0%,transparent 65%),
-                 linear-gradient(140deg,#f9ecd7 0%,var(--bg2) 60%,#d9c19e 100%)}
-  .b2{width:820px;height:540px;right:-16%;bottom:-18%;
-      background:radial-gradient(ellipse at center,#fff6 0%,transparent 65%),
-                 linear-gradient(170deg,#f3e4c9 0%,var(--bg) 60%,var(--bg2) 100%)}
-  @keyframes drift{to{transform:translate3d(0,-20px,0)}}
   .wrap{max-width:780px;margin:0 auto;padding:26px 16px 160px;display:grid;gap:18px}
-  .card{position:relative;padding:22px;border-radius:var(--r);
+  .card{position:relative;padding:22px;border-radius:22px;
         background:var(--glass);backdrop-filter:blur(12px);
         border:1px solid var(--glass-brd);box-shadow:var(--shadow-lg);overflow:hidden}
-  .shine{position:absolute;inset:-30% -10%;border-radius:inherit;pointer-events:none;
-         background:linear-gradient(120deg,rgba(255,255,255,.60) 0%,rgba(255,255,255,0) 60%);
-         filter:blur(18px);opacity:.32;animation:shine 9s ease-in-out infinite}
-  @keyframes shine{50%{transform:translate(28%,18%) rotate(8deg)}}
   .bubble{display:inline-flex;align-items:center;gap:10px;
           padding:11px 16px;border-radius:999px;background:#fff;
           border:1px solid var(--ring);box-shadow:var(--shadow-sm);font-weight:800}
   .bubble small{font-weight:700;color:var(--muted)}
   .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
-  .btn{display:flex;align-items:center;justify-content:center;gap:9px;
+  .btn{display:flex;align-items:center;justify-content:center;
        padding:12px;border-radius:16px;text-decoration:none;font-weight:800;
        color:var(--ink);background:#fff;border:1px solid var(--ring);
        box-shadow:inset 0 2px 0 #ffffffcc,0 10px 26px rgba(10,12,16,.10)}
-  .btn svg{width:20px;height:20px}
-  .add{display:block;text-align:center;margin-top:8px;font-weight:900;color:var(--cta);text-decoration:none}
   .chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;padding:0;margin:12px 0 0}
   .chip{background:#fff;border:1px solid var(--ring);border-radius:12px;padding:10px 12px;font-weight:700;
         box-shadow:inset 0 2px 0 #ffffffcc,0 8px 24px rgba(10,12,16,.10)}
-  .dock{position:fixed;left:12px;right:12px;bottom:12px;z-index:5;
-        display:grid;grid-template-columns:repeat(5,1fr);gap:10px;
-        background:var(--glass);border:1px solid var(--glass-brd);backdrop-filter:blur(10px);
-        padding:8px;border-radius:18px;box-shadow:var(--shadow-lg)}
-  .dock a{display:grid;place-items:center;padding:10px;background:#fff;border:1px solid var(--ring);
-          border-radius:14px;text-decoration:none;color:var(--ink);font-weight:800}
-  .dock svg{width:20px;height:20px}
-  @media (min-width:560px){.grid{grid-template-columns:repeat(4,1fr)}.dock{display:none}}
-  /* Map intégrée */
   .map-container{overflow:hidden;border-radius:16px;border:1px solid var(--ring);box-shadow:var(--shadow-sm)}
   .map-container iframe{width:100%;height:250px;border:0}
+  .footer{text-align:center;font-size:.85rem;color:var(--muted);margin-top:20px}
 </style>
 </head>
 <body>
-  <div class="bg"><div class="blob b1"></div><div class="blob b2"></div></div>
   <main class="wrap">
     <!-- NOM -->
     <section class="card" style="display:flex;justify-content:center">
-      <div class="shine"></div>
       <div class="bubble">
         <span>Arnaud Castillon</span>
         <small>artisan plaquiste</small>
@@ -76,7 +49,6 @@
 
     <!-- MAPS DIRECTEMENT -->
     <section class="card">
-      <div class="shine"></div>
       <h2>📍 Localisation</h2>
       <div class="map-container">
         <iframe 
@@ -88,20 +60,18 @@
 
     <!-- CONTACT -->
     <section id="contact" class="card">
-      <div class="shine"></div>
       <h2>Contact</h2>
       <div class="grid">
-        <a class="btn" href="tel:+33614709811">📱 06&nbsp;14&nbsp;70&nbsp;98&nbsp;11</a>
-        <a class="btn" href="tel:+33243424617">☎️ 02&nbsp;43&nbsp;42&nbsp;46&nbsp;17</a>
-        <a class="btn" href="https://wa.me/33614709811" target="_blank" rel="noopener">💬 WhatsApp</a>
-        <a class="btn" href="mailto:ludovic.robert@ymail.com?subject=Demande%20de%20devis%20—%20Arnaud%20Castillon">✉️ ludovic.robert@ymail.com</a>
+        <a class="btn" href="tel:+33614709811">06&nbsp;14&nbsp;70&nbsp;98&nbsp;11</a>
+        <a class="btn" href="tel:+33243424617">02&nbsp;43&nbsp;42&nbsp;46&nbsp;17</a>
+        <a class="btn" href="https://wa.me/33614709811" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn" href="mailto:ludovic.robert@ymail.com?subject=Demande%20de%20devis%20—%20Arnaud%20Castillon">Email</a>
         <a class="btn" id="vcfBtn" href="#">➕ Ajouter au contact</a>
       </div>
     </section>
 
     <!-- PRESTATIONS -->
     <section class="card">
-      <div class="shine"></div>
       <h2>Prestations</h2>
       <ul class="chips">
         <li class="chip">Spécialiste de la plâtrerie</li>
@@ -112,16 +82,10 @@
         <li class="chip">Finition rapide & soignée</li>
       </ul>
     </section>
-  </main>
 
-  <!-- DOCK FLOTTANT -->
-  <nav class="dock" aria-label="Actions rapides">
-    <a href="tel:+33614709811" aria-label="Appeler">📱</a>
-    <a href="https://wa.me/33614709811" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
-    <a href="mailto:ludovic.robert@ymail.com" aria-label="Email">✉️</a>
-    <a href="#contact" aria-label="Contact">📇</a>
-    <a id="dVCF" href="#" aria-label="Ajouter au contact">➕</a>
-  </nav>
+    <!-- FOOTER -->
+    <div class="footer">© 2025 Arnaud Castillon — mini-site créé par RG.card</div>
+  </main>
 
 <script>
   function buildVCard(){
@@ -143,7 +107,6 @@
     },{once:true});
   }
   arm(document.getElementById("vcfBtn"));
-  arm(document.getElementById("dVCF"));
 </script>
 </body>
 </html>
