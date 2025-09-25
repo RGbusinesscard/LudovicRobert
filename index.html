@@ -4,121 +4,153 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arnaud Castillon — Carte de visite</title>
-<meta name="theme-color" content="#e7d6ba">
+<meta name="theme-color" content="#e6d6ba">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  /* ——— Design tokens ——— */
+  /* =================== TOKENS =================== */
   :root{
-    --bg:#eddfc7;            /* beige doux (univers d'inspi) */
-    --ink:#1f252b;
-    --muted:#626871;
-    --cta:#c21f20;           /* rouge discret pour accents */
+    --bg:#eddfc6;               /* beige fond */
+    --bg2:#e6d3b8;              /* beige 2 */
+    --ink:#1e242a;
+    --muted:#636a72;
+    --cta:#c21f20;              /* accent rouge discret */
+    --ring:#eadfcf;
     --glass:rgba(255,255,255,.62);
     --glass-brd:rgba(255,255,255,.38);
-    --ring:#eadfcf;
     --r:22px;
-    --shadow-lg:0 18px 60px rgba(12,15,20,.16);
-    --shadow-sm:0 8px 26px rgba(12,15,20,.10);
+    --shadow-lg:0 22px 80px rgba(10,12,16,.20);
+    --shadow-sm:0 10px 30px rgba(10,12,16,.12);
+    --gold1:#f5e6c8;            /* liseré “doré satiné” */
+    --gold2:#d9c29e;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; background:var(--bg); color:var(--ink);
+    margin:0; color:var(--ink); background:var(--bg);
     font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
 
-  /* ——— Fond animé ultra léger ——— */
-  .bg{position:fixed; inset:0; z-index:-2; overflow:hidden}
-  .blob{position:absolute; filter:blur(38px) saturate(112%); opacity:.55; animation:float 26s ease-in-out infinite alternate}
-  .b1{width:900px;height:600px;left:-15%;top:-12%;
+  /* =================== BACKGROUND =================== */
+  .bg{position:fixed; inset:0; z-index:-3; overflow:hidden}
+  .blob{position:absolute; filter:blur(40px) saturate(115%); opacity:.55; animation:drift 26s ease-in-out infinite alternate}
+  .b1{width:1100px;height:700px;left:-18%;top:-14%;
       background:radial-gradient(ellipse at center,#fff8 0%,transparent 65%),
-                 linear-gradient(140deg,#f9ecd7 0%,#e7d6ba 60%,#dac3a3 100%)}
-  .b2{width:720px;height:520px;right:-12%;bottom:-16%;
+                 linear-gradient(140deg,#f9ecd7 0%,var(--bg2) 60%,#d9c19e 100%)}
+  .b2{width:820px;height:540px;right:-16%;bottom:-18%;
       background:radial-gradient(ellipse at center,#fff6 0%,transparent 65%),
-                 linear-gradient(170deg,#f3e4c9 0%,#eddfc7 60%,#e7d6ba 100%)}
-  @keyframes float{to{transform:translate3d(0,-18px,0)}}
+                 linear-gradient(170deg,#f3e4c9 0%,var(--bg) 60%,var(--bg2) 100%)}
+  @keyframes drift{to{transform:translate3d(0,-20px,0)}}
   .grain{position:absolute; inset:-20%; opacity:.05; mix-blend-mode:multiply;
-    background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="1"/></filter><rect width="220" height="220" filter="url(%23n)"/></svg>') repeat}
+    background:url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220">\
+        <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="1"/></filter>\
+        <rect width="220" height="220" filter="url(%23n)"/></svg>') repeat}
 
-  /* ——— Layout / cartes ——— */
-  .wrap{max-width:760px; margin:0 auto; padding:24px 16px 148px; perspective:900px}
-  .stack{display:grid; gap:16px}
+  /* =================== LAYOUT =================== */
+  .wrap{max-width:780px; margin:0 auto; padding:26px 16px 160px; perspective:1000px}
+  .stack{display:grid; gap:18px}
+
+  /* =================== CARD 3D =================== */
   .card{
     position:relative; padding:22px; border-radius:var(--r);
     background:var(--glass); backdrop-filter:blur(12px);
     border:1px solid var(--glass-brd); box-shadow:var(--shadow-lg);
-    transform-style:preserve-3d; transition:transform .18s ease, box-shadow .25s ease;
+    transform-style:preserve-3d; transition:transform .16s ease, box-shadow .25s ease;
     overflow:hidden;
   }
-  /* reflet doux + ombre mouvante (effet 3D subtil) */
-  .card::after{
-    content:""; position:absolute; inset:-30% -10%; border-radius:inherit; pointer-events:none;
-    background:linear-gradient(120deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 60%);
-    mix-blend-mode:screen; filter:blur(18px); opacity:.33; animation:shine 9s ease-in-out infinite;
+  .card::before{ /* liseré doré très discret */
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background:linear-gradient(145deg, #fff0 15%, var(--gold1) 35%, #fff0 55%, var(--gold2) 85%);
+    mix-blend-mode:soft-light; opacity:.45;
+  }
+  .shine{ /* reflet qui glisse */
+    position:absolute; inset:-30% -10%; border-radius:inherit; pointer-events:none;
+    background:linear-gradient(120deg, rgba(255,255,255,.60) 0%, rgba(255,255,255,0) 60%);
+    filter:blur(18px); opacity:.32; animation:shine 9s ease-in-out infinite;
   }
   @keyframes shine{50%{transform:translate(28%,18%) rotate(8deg)}}
-  .tilt:hover{box-shadow:0 28px 84px rgba(12,15,20,.22)}
+  .float{animation:floatY 6s ease-in-out infinite}
+  @keyframes floatY{50%{transform:translateY(-6px)}}
+  .tilt:hover{box-shadow:0 32px 96px rgba(10,12,16,.24)}
 
   h1,h2,h3{margin:0}
-  h2{font-size:1.25rem}
+  h2{font-size:1.22rem}
   .muted{color:var(--muted)}
 
-  /* ——— Bulle nom + métier ——— */
+  /* =================== BULLE NOM/MÉTIER =================== */
   .bubble{
     display:inline-flex; align-items:center; gap:10px;
-    padding:10px 16px; border-radius:999px;
+    padding:11px 16px; border-radius:999px;
     background:#fff; border:1px solid var(--ring); box-shadow:var(--shadow-sm);
     font-weight:800;
   }
   .bubble small{font-weight:700; color:var(--muted)}
 
-  /* ——— Boutons / liens ——— */
+  /* =================== BUTTONS =================== */
   .grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:12px}
   .btn{
-    display:flex; align-items:center; justify-content:center; gap:8px;
-    padding:12px; border-radius:14px; text-decoration:none; font-weight:700;
-    color:var(--ink); background:#fff; border:1px solid var(--ring); box-shadow:var(--shadow-sm);
-    transition:transform .12s ease, box-shadow .2s ease;
+    display:flex; align-items:center; justify-content:center; gap:9px;
+    padding:12px; border-radius:16px; text-decoration:none; font-weight:800; letter-spacing:.15px;
+    color:var(--ink); background:
+      radial-gradient(120% 120% at 20% 10%, #fff 0%, #f7f7f7 50%, #f1f1f1 100%);
+    border:1px solid var(--ring); box-shadow:
+      inset 0 2px 0 #ffffffcc,
+      0 10px 26px rgba(10,12,16,.10);
+    transition:transform .12s ease, box-shadow .2s ease, filter .2s ease;
   }
-  .btn:active{transform:scale(.985)}
+  .btn:active{transform:translateY(1px) scale(.99)}
   .btn svg{width:20px;height:20px}
-  .add{display:block; text-align:center; margin-top:8px; font-weight:800; color:var(--cta); text-decoration:none}
+  .add{display:block; text-align:center; margin-top:8px; font-weight:900; color:var(--cta); text-decoration:none}
 
-  /* ——— Prestations ——— */
+  /* =================== CHIPS PRESTATIONS =================== */
   .chips{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; list-style:none; padding:0; margin:12px 0 0}
-  .chip{background:#fff; border:1px solid var(--ring); border-radius:12px; padding:10px 12px; font-weight:700}
+  .chip{
+    background:radial-gradient(140% 120% at 20% 10%, #fff 0%, #f7f7f7 50%, #f1f1f1 100%);
+    border:1px solid var(--ring); border-radius:12px; padding:10px 12px; font-weight:700;
+    box-shadow:inset 0 2px 0 #ffffffcc, 0 8px 24px rgba(10,12,16,.10);
+  }
 
-  /* ——— Barre d’actions flottante (mobile) ——— */
+  /* =================== BOTTOM DOCK (mobile) =================== */
   .dock{
     position:fixed; left:12px; right:12px; bottom:12px; z-index:5;
     display:grid; grid-template-columns:repeat(5,1fr); gap:10px;
     background:var(--glass); border:1px solid var(--glass-brd); backdrop-filter:blur(10px);
-    padding:8px; border-radius:16px; box-shadow:var(--shadow-lg)
+    padding:8px; border-radius:18px; box-shadow:var(--shadow-lg)
   }
-  .dock a{display:grid; place-items:center; padding:10px; background:#fff; border:1px solid var(--ring); border-radius:12px; text-decoration:none; color:var(--ink); font-weight:700}
+  .dock a{
+    display:grid; place-items:center; padding:10px;
+    background:radial-gradient(120% 120% at 20% 10%, #fff 0%, #f7f7f7 50%, #f1f1f1 100%);
+    border:1px solid var(--ring); border-radius:14px; text-decoration:none; color:var(--ink); font-weight:800;
+    box-shadow:inset 0 2px 0 #ffffffcc, 0 10px 26px rgba(10,12,16,.10)
+  }
+  .dock a .pulse{animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{50%{transform:translateZ(0) scale(1.06)}}
   .dock svg{width:20px;height:20px}
   @media (min-width:560px){ .grid{grid-template-columns:repeat(4,1fr)} .dock{display:none} }
 </style>
 </head>
 <body>
-  <!-- Fond -->
+  <!-- BACKGROUND -->
   <div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="grain"></div></div>
 
   <main class="wrap stack">
-    <!-- Bulle nom + métier -->
-    <section class="card tilt" style="display:flex;justify-content:center">
+    <!-- BULLE NOM + MÉTIER -->
+    <section class="card tilt float" style="display:flex;justify-content:center">
+      <div class="shine"></div>
       <div class="bubble">
         <span>Arnaud Castillon</span>
         <small>artisan plaquiste</small>
       </div>
     </section>
 
-    <!-- Contact -->
+    <!-- CONTACT -->
     <section id="contact" class="card tilt">
+      <div class="shine"></div>
       <h2>Contact</h2>
-      <div class="grid">
+      <div class="grid" style="margin-top:10px">
         <a class="btn" id="callMobile" href="#">
+          <!-- phone -->
           <svg viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.2a15.1 15.1 0 007.2 7.2l2.4-2.4c.3-.3.8-.4 1.2-.2 1.3.5 2.7.8 4.1.8.7 0 1.3.6 1.3 1.3v3.7c0 .7-.6 1.3-1.3 1.3C9.8 22 2 14.2 2 4.3 2 3.6 2.6 3 3.3 3H7c.7 0 1.3.6 1.3 1.3 0 1.4.3 2.8.8 4.1.1.4 0 .9-.2 1.2l-2.3 2.6z"/></svg>
           06&nbsp;14&nbsp;70&nbsp;98&nbsp;11
         </a>
@@ -127,14 +159,17 @@
           02&nbsp;43&nbsp;42&nbsp;46&nbsp;17
         </a>
         <a class="btn" id="waLink" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 3.5A11.7 11.7 0 0012 1C6 1 1.2 5.8 1.2 11.8c0 2.1.6 4.2 1.8 6L1 23l5.4-1.8A11.8 11.8 0 0012 22.6c6 0 10.8-4.8 10.8-10.8 0-2.9-1.1-5.7-3.1-7.8z"/></svg>
+          <!-- whatsapp -->
+          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 3.5A11.7 11.7 0 0012 1C6 1 1.2 5.8 1.2 11.8c0 2.1.6 4.2 1.8 6L1 23l5.4-1.8A11.8 11.8 0 0012 22.6c6 0 10.8-4.8 10.8-10.8 0-2.9-1.1-5.7-3.1-7.8zM12 20.3a8.5 8.5 0 01-4.3-1.2l-.3-.2-3.2 1 1-3.1-.2-.3a8.6 8.6 0 01-1.3-4.5C3.7 6.9 7.4 3.2 12 3.2c2.3 0 4.4.9 6 2.5a8.5 8.5 0 012.5 6c0 4.6-3.7 8.5-8.5 8.5z"/></svg>
           WhatsApp
         </a>
         <a class="btn" id="mailLink" href="#">
+          <!-- mail -->
           <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12c0 1.1.9 2 2 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          Email
+          ludovic.robert@ymail.com
         </a>
         <a class="btn" id="mapsLink" href="#" target="_blank" rel="noopener">
+          <!-- pin -->
           <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
           Itinéraire
         </a>
@@ -142,8 +177,9 @@
       </div>
     </section>
 
-    <!-- Prestations -->
+    <!-- PRESTATIONS -->
     <section class="card tilt">
+      <div class="shine"></div>
       <h2>Prestations</h2>
       <ul class="chips">
         <li class="chip">Spécialiste de la plâtrerie</li>
@@ -156,25 +192,17 @@
     </section>
   </main>
 
-  <!-- Barre flottante (mobile) -->
+  <!-- DOCK FLOTTANT (mobile) -->
   <nav class="dock" aria-label="Actions rapides">
-    <a id="dCall" href="#" aria-label="Appeler">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.2a15.1 15.1 0 007.2 7.2l2.4-2.4c.3-.3.8-.4 1.2-.2 1.3.5 2.7.8 4.1.8.7 0 1.3.6 1.3 1.3v3.7c0 .7-.6 1.3-1.3 1.3C9.8 22 2 14.2 2 4.3 2 3.6 2.6 3 3.3 3H7c.7 0 1.3.6 1.3 1.3 0 1.4.3 2.8.8 4.1.1.4 0 .9-.2 1.2l-2.3 2.6z"/></svg>
-    </a>
-    <a id="dWa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 3.5A11.7 11.7 0 0012 1C6 1 1.2 5.8 1.2 11.8c0 2.1.6 4.2 1.8 6L1 23l5.4-1.8A11.8 11.8 0 0012 22.6c6 0 10.8-4.8 10.8-10.8 0-2.9-1.1-5.7-3.1-7.8z"/></svg>
-    </a>
-    <a id="dMail" href="#" aria-label="Email">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12c0 1.1.9 2 2 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-    </a>
-    <a id="dMaps" href="#" target="_blank" rel="noopener" aria-label="Itinéraire">
-      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
-    </a>
+    <a id="dCall" href="#" aria-label="Appeler"><svg class="pulse" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.2a15.1 15.1 0 007.2 7.2l2.4-2.4c.3-.3.8-.4 1.2-.2 1.3.5 2.7.8 4.1.8.7 0 1.3.6 1.3 1.3v3.7c0 .7-.6 1.3-1.3 1.3C9.8 22 2 14.2 2 4.3 2 3.6 2.6 3 3.3 3H7c.7 0 1.3.6 1.3 1.3 0 1.4.3 2.8.8 4.1.1.4 0 .9-.2 1.2l-2.3 2.6z"/></svg></a>
+    <a id="dWa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="pulse" viewBox="0 0 24 24"><path fill="currentColor" d="M20.5 3.5A11.7 11.7 0 0012 1C6 1 1.2 5.8 1.2 11.8c0 2.1.6 4.2 1.8 6L1 23l5.4-1.8A11.8 11.8 0 0012 22.6c6 0 10.8-4.8 10.8-10.8 0-2.9-1.1-5.7-3.1-7.8z"/></svg></a>
+    <a id="dMail" href="#" aria-label="Email"><svg class="pulse" viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4a2 2 0 00-2 2v12c0 1.1.9 2 2 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+    <a id="dMaps" href="#" target="_blank" rel="noopener" aria-label="Itinéraire"><svg class="pulse" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg></a>
     <a id="dVCF" href="#" aria-label="Ajouter au contact">➕</a>
   </nav>
 
 <script>
-  // ——— INFOS (mises à jour selon ce que tu m'as donné) ———
+  // ===== INFOS (confirmées) =====
   const INFO = {
     firstName: "Arnaud",
     lastName: "Castillon",
@@ -187,22 +215,21 @@
     country: "France"
   };
 
-  // Liens
+  // Liens dynamiques
   const telMobile = "tel:" + INFO.phoneMobile;
   const telWork   = "tel:" + INFO.phoneWork;
   const wa        = "https://wa.me/" + INFO.phoneMobile.replace(/\D/g,'');
   const mail      = "mailto:" + encodeURIComponent(INFO.email) + "?subject=" + encodeURIComponent("Demande de devis — Arnaud Castillon");
   const maps      = INFO.mapsUrl;
 
-  const mapLinks = [
-    ["callMobile", telMobile], ["callWork", telWork], ["waLink", wa], ["mailLink", mail], ["mapsLink", maps],
-    ["dCall", telMobile], ["dWa", wa], ["dMail", mail], ["dMaps", maps]
-  ];
-  mapLinks.forEach(([id,href]) => { const el=document.getElementById(id); if(el) el.href = href; });
+  [["callMobile",telMobile],["callWork",telWork],["waLink",wa],["mailLink",mail],["mapsLink",maps],
+   ["dCall",telMobile],["dWa",wa],["dMail",mail],["dMaps",maps]].forEach(([id,href])=>{
+    const el=document.getElementById(id); if(el) el.href=href;
+  });
 
-  // VCF (ajout contact)
+  // VCF
   function buildVCard(){
-    const lines = [
+    const lines=[
       "BEGIN:VCARD","VERSION:3.0",
       `N:${INFO.lastName};${INFO.firstName};;;`,
       `FN:${INFO.firstName} ${INFO.lastName}`,
@@ -214,30 +241,29 @@
       `REV:${new Date().toISOString()}`,
       "END:VCARD"
     ];
-    return new Blob([lines.join("\n")], {type:"text/vcard"});
+    return new Blob([lines.join("\\n")], {type:"text/vcard"});
   }
-  const vcfBtn = document.getElementById("vcfBtn");
-  const dVCF = document.getElementById("dVCF");
-  function arm(btn){
-    btn.addEventListener("click", (e)=>{
-      const blob = buildVCard(); const url = URL.createObjectURL(blob);
-      btn.href = url; btn.download = "arnaud-castillon.vcf";
+  function armVCF(btn){
+    btn.addEventListener("click",()=>{
+      const blob=buildVCard(); const url=URL.createObjectURL(blob);
+      btn.href=url; btn.download="arnaud-castillon.vcf";
     }, {once:true});
   }
-  arm(vcfBtn); arm(dVCF);
+  armVCF(document.getElementById("vcfBtn"));
+  armVCF(document.getElementById("dVCF"));
 
-  // Effet tilt léger (3D) au pointeur / doigt
+  // Tilt 3D + ombre qui suit le doigt
   document.querySelectorAll(".tilt").forEach(card=>{
-    let rID=null;
-    const damp=22; const reset=()=>{card.style.transform="rotateX(0deg) rotateY(0deg)";};
-    const move=(x,y,rect)=>{
-      const rx = ((rect.height/2 - (y-rect.top)) / damp);
-      const ry = (((x-rect.left) - rect.width/2) / damp);
-      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-    };
-    card.addEventListener("mousemove",(e)=>{ const rect=card.getBoundingClientRect(); move(e.clientX,e.clientY,rect); });
-    card.addEventListener("mouseleave",()=>{ cancelAnimationFrame(rID); reset(); });
-    card.addEventListener("touchmove",(e)=>{ const t=e.touches[0]; const rect=card.getBoundingClientRect(); move(t.clientX,t.clientY,rect); }, {passive:true});
+    const damp=22;
+    const reset=()=>{card.style.transform="rotateX(0deg) rotateY(0deg)";}
+    function move(x,y,rect){
+      const rx=((rect.height/2 - (y-rect.top))/damp);
+      const ry=(((x-rect.left)-rect.width/2)/damp);
+      card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+    }
+    card.addEventListener("mousemove",(e)=>{const r=card.getBoundingClientRect(); move(e.clientX,e.clientY,r);});
+    card.addEventListener("mouseleave",reset);
+    card.addEventListener("touchmove",(e)=>{const t=e.touches[0]; const r=card.getBoundingClientRect(); move(t.clientX,t.clientY,r);},{passive:true});
     card.addEventListener("touchend",reset);
   });
 </script>
