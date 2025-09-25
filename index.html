@@ -1,1 +1,187 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arnaud Castillon — Carte de visite</title>
+  <meta name="description" content="Arnaud Castillon, artisan plaquiste — plâtrerie, isolation, aménagement de combles, faux plafonds. Le Mans et alentours.">
+  <meta name="theme-color" content="#e2c8a3">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    :root{
+      --bg:#ead7bd;
+      --sand:#e2c8a3;
+      --text:#1e2329;
+      --muted:#5b6066;
+      --primary:#c12222; /* rouge CTA */
+      --glass:rgba(255,255,255,0.58);
+      --glass-brd:rgba(255,255,255,0.35);
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.5;
+    }
+    .wrap{max-width:640px;margin:0 auto;padding:18px 16px 120px;position:relative}
+    .brand{display:flex;align-items:center;gap:12px;margin:8px 0 14px}
+    .logo{width:44px;height:44px;border-radius:12px;background:#fff;color:var(--primary);display:grid;place-items:center;font-weight:800;box-shadow:0 6px 30px rgba(0,0,0,.1)}
+    .brand-text h1{font-size:1.6rem;margin:0;font-weight:700}
+    .brand-text .role{margin:2px 0 0;color:var(--muted);font-weight:500}
 
+    .glass{background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-brd);box-shadow:0 10px 35px rgba(0,0,0,.12)}
+    .hero{padding:22px;border-radius:20px;margin:8px 0 18px;text-align:center}
+    .hero h2{margin:0 0 8px;font-size:1.4rem;font-weight:700}
+    .subtitle{margin:0 0 14px;color:var(--muted)}
+    .cta{display:inline-block;background:var(--primary);color:#fff;text-decoration:none;padding:12px 16px;border-radius:12px;font-weight:700;letter-spacing:.2px}
+
+    .contact{padding:10px 0}
+    .contact h3{margin:4px 0 10px}
+    .buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .btn{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #e6e0d6;background:#fff;text-decoration:none;color:var(--text);padding:12px;border-radius:14px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.06)}
+    .btn:active{transform:scale(.98)}
+    .add-contact{display:block;margin:14px auto 4px;text-align:center;font-weight:700;text-decoration:none;color:var(--primary)}
+    .info{margin:8px 2px;color:var(--muted);font-size:.98rem}
+    .info p{margin:6px 0}
+
+    .services{padding:18px;border-radius:20px;margin:18px 0}
+    .services h3{margin:0 0 10px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0;margin:0;list-style:none}
+    .grid li{background:#fff;border:1px solid #e6e0d6;border-radius:12px;padding:10px 12px;font-weight:600}
+    .note{color:var(--muted);margin:12px 0 0}
+
+    .footer{margin-top:24px;text-align:center;color:var(--muted)}
+
+    .bg{position:fixed;inset:0;z-index:-1;overflow:hidden}
+    .bg-gradient{position:absolute;inset:-20%;background:
+      radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.55), transparent 60%),
+      radial-gradient(800px 500px at -10% 20%, rgba(255,255,255,.35), transparent 60%),
+      linear-gradient(180deg,var(--sand),#f0e0c6 60%, #ead7bd 100%);
+      filter:saturate(105%) contrast(102%);animation:float 16s ease-in-out infinite alternate}
+    @keyframes float{to{transform:translateY(-12px)}}
+    .bg-noise{position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%221%22 stitchTiles=%22stitch%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 opacity=%220.03%22/></svg>') repeat;mix-blend-mode:multiply;pointer-events:none}
+    @media (min-width:540px){ .buttons{grid-template-columns:repeat(4,minmax(0,1fr))} }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="brand">
+      <div class="logo">AC</div>
+      <div class="brand-text">
+        <h1>Arnaud <span>Castillon</span></h1>
+        <p class="role">Artisan plaquiste</p>
+      </div>
+    </header>
+
+    <section class="hero glass">
+      <h2>Spécialiste de la plâtrerie<br>dans la région du Mans</h2>
+      <p class="subtitle">Plâtrerie, isolation, aménagement de combles, faux plafonds.</p>
+      <a class="cta" href="#contact">Contactez-nous</a>
+    </section>
+
+    <section class="contact" id="contact">
+      <h3>Contact rapide</h3>
+      <div class="buttons">
+        <a class="btn" id="callLink" href="#">Appeler</a>
+        <a class="btn" id="waLink" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn" id="mailLink" href="#">Email</a>
+        <a class="btn" id="mapsLink" href="#" target="_blank" rel="noopener">Itinéraire</a>
+      </div>
+
+      <a class="add-contact" id="vcfBtn" href="#" download>➕ Ajouter au contact</a>
+
+      <div class="info">
+        <p><strong>Zone d’intervention&nbsp;:</strong> Le Mans et alentours</p>
+        <p><strong>Horaires&nbsp;:</strong> sur rendez-vous (téléphone & e-mail)</p>
+      </div>
+    </section>
+
+    <section class="services glass">
+      <h3>Prestations</h3>
+      <ul class="grid">
+        <li>Plâtrerie</li>
+        <li>Cloisonnement</li>
+        <li>Isolation</li>
+        <li>Aménagement de combles</li>
+        <li>Faux plafonds</li>
+        <li>Finitions & reprises</li>
+      </ul>
+      <p class="note">Prise de contact en moins de 10&nbsp;secondes — aucune appli requise.</p>
+    </section>
+
+    <footer class="footer">
+      <small>© <span id="year"></span> Arnaud Castillon — Carte de visite numérique. Propulsé par RG.card.</small>
+    </footer>
+  </main>
+
+  <div class="bg">
+    <div class="bg-gradient"></div>
+    <div class="bg-noise"></div>
+  </div>
+
+  <script>
+    // ———————————
+    // INFOS À REMPLACER
+    // ———————————
+    const INFO = {
+      firstName: "Arnaud",
+      lastName: "Castillon",
+      org: "Artisan plaquiste",
+      title: "",
+      phoneIntl: "+33700000000",   // format international pour tel / WhatsApp
+      phoneDisplay: "07 00 00 00 00",
+      email: "contact@exemple.fr",
+      city: "Le Mans",
+      country: "France",
+      mapsQuery: "Le Mans",
+      website: "" // facultatif
+    };
+
+    // Liens dynamiques
+    const callLink = document.getElementById("callLink");
+    const waLink   = document.getElementById("waLink");
+    const mailLink = document.getElementById("mailLink");
+    const mapsLink = document.getElementById("mapsLink");
+
+    callLink.href = "tel:" + INFO.phoneIntl;
+    waLink.href   = "https://wa.me/" + INFO.phoneIntl.replace(/\D/g,'');
+    mailLink.href = "mailto:" + encodeURIComponent(INFO.email) +
+                    "?subject=" + encodeURIComponent("Demande de devis — " + INFO.firstName + " " + INFO.lastName);
+    mapsLink.href = "https://maps.google.com/?q=" + encodeURIComponent(INFO.mapsQuery);
+
+    // VCF à la volée
+    function buildVCard(i){
+      const lines = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        `N:${i.lastName};${i.firstName};;;`,
+        `FN:${i.firstName} ${i.lastName}`,
+        `ORG:${i.org}`,
+        i.title ? `TITLE:${i.title}` : "",
+        `TEL;TYPE=CELL,VOICE:${i.phoneIntl}`,
+        `EMAIL;TYPE=INTERNET:${i.email}`,
+        `ADR;TYPE=WORK:;;${i.city};;;${i.country}`,
+        i.website ? `URL:${i.website}` : "",
+        `REV:${new Date().toISOString()}`,
+        "END:VCARD"
+      ].filter(Boolean).join("\\n");
+      return new Blob([lines], {type: "text/vcard"});
+    }
+
+    const vcfBtn = document.getElementById("vcfBtn");
+    vcfBtn.addEventListener("click", (e) => {
+      const blob = buildVCard(INFO);
+      const url  = URL.createObjectURL(blob);
+      vcfBtn.href = url;
+      vcfBtn.download = `${INFO.firstName.toLowerCase()}-${INFO.lastName.toLowerCase()}.vcf`;
+      // laisse le navigateur télécharger
+    }, {once:true});
+
+    // Année dynamique
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
